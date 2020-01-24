@@ -1,11 +1,8 @@
 package infixToPosfix.convert;
 
-import java.lang.reflect.Method;
+@FunctionalInterface
+public interface Operation {
 
-public enum Operations {
+    double calculate (double x1, double x2);
 
-    ADDITION("+", );
-
-    Operations(String sign,  operation) {
-    }
 }

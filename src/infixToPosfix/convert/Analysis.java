@@ -12,7 +12,7 @@ public class Analysis {
 
     private static Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
-    public static long convert(String infix) {
+    public static double convert(String infix) {
 
         var operatorStack = new Stack<String>();
         var expresion = new ArrayList<String>();
@@ -49,10 +49,10 @@ public class Analysis {
 
             }
             expresion.addAll(operatorStack);
-            expresion.stream().forEach(System.out::println);
+            return calculate(expresion);
 
         } else if (!infix.contains(PARENTHESIS_CLOSE) && !infix.contains(PARENTHESIS_OPEN)) {
-
+            //Under Construction
         } else {
             System.out.println("Error! ");
         }
@@ -61,10 +61,36 @@ public class Analysis {
         return 0L;
     }
 
-    public static boolean isNumeric(String strNum) {
+    private static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
         }
         return pattern.matcher(strNum).matches();
+    }
+
+    private static double calculate(List<String> expresion){
+
+        ArrayDeque<Double> pile = new ArrayDeque();
+
+        expresion.forEach(s -> {
+
+            if (!isNumeric(s)){
+                double number1 = pile.pollLast();
+                double number2 = pile.pollLast();
+
+                Actions actions = Actions.searchBySign(s);
+                if(actions != null){
+                    Operation operation = actions.getOperation();
+                    double numberCalculated = operation.calculate(number2, number1);
+                    pile.add(numberCalculated);
+                }
+
+            }else{
+                pile.add(Double.parseDouble(s));
+            }
+
+        });
+
+        return pile.getFirst();
     }
 }

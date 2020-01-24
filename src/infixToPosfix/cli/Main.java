@@ -16,18 +16,14 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-
-        Analysis.convert("( ( 1 + 2 ) - 3 * ( 4 / 5 ) ) + 6");
-
+        System.out.println(Analysis.convert("( ( 1 + 2 ) - 3 * ( 4 / 5 ) ) + 6"));
 
         /*if (args.length == 0){
-
 
             System.out.println("Please provide a path or filename as input argument :)");
         }
 
-        //Leer varias lineas, sin importar cuantas vengas, y se debe regresar un archivo en el mismo orden de cada
-        //una
+        //Reading many lines and return a file with results
         Path path = Paths.get(args[0]);
         List<String> read = Files.readAllLines(path);*/
 
