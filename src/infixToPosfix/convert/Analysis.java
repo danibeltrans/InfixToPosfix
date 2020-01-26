@@ -61,7 +61,6 @@ public class Analysis {
             System.out.println("Error! ");
         }
 
-
         return 0L;
     }
 
