@@ -9,23 +9,33 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+import java.util.stream.Stream;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        System.out.println(Analysis.convert("( ( 1 + 2 ) - 3 * ( 4 / 5 ) ) + 6"));
+        String uriFile;
 
-        /*if (args.length == 0){
-
-            System.out.println("Please provide a path or filename as input argument :)");
+        if(args.length == 0){
+            //By Default
+            uriFile = "input.txt";
+        }else {
+            uriFile = args[0];
         }
 
         //Reading many lines and return a file with results
-        Path path = Paths.get(args[0]);
-        List<String> read = Files.readAllLines(path);*/
+        Path input = Paths.get(uriFile);
+        List<String> read = Files.readAllLines(input);
+
+        List<String> results = read.stream().mapToDouble(Analysis::convert).mapToObj(String::valueOf).collect(Collectors.toList());
+
+        Files.write(Paths.get("output.txt"), results, StandardOpenOption.CREATE);
 
     }
 }

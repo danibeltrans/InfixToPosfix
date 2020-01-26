@@ -48,7 +48,11 @@ public class Analysis {
                 }
 
             }
-            expresion.addAll(operatorStack);
+
+            while(!operatorStack.empty()){
+                expresion.add(operatorStack.pop());
+            }
+
             return calculate(expresion);
 
         } else if (!infix.contains(PARENTHESIS_CLOSE) && !infix.contains(PARENTHESIS_OPEN)) {
