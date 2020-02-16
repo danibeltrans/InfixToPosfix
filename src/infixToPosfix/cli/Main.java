@@ -21,7 +21,11 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        String uriFile = Optional.of(args[0]).orElse("input.txt");
+        String uriFile = "input.txt";
+
+        if (args.length > 0){
+            uriFile = args[0];
+        }
 
         //Reading many lines and return a file with results
         Path input = Paths.get(uriFile);
@@ -35,6 +39,5 @@ public class Main {
         Files.write(Paths.get("output.txt"),
                 results,
                 StandardOpenOption.CREATE);
-
     }
 }
